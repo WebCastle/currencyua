@@ -9,6 +9,7 @@ class Currency{
 	private static $codes;
 
     public static function usdTo($currency, $value){
+		self::validate($currency);
         if ($currency == 'USD')
             return $value;
         $rate  = Cache::remember('currency-usd'.'-'.$currency, config('currency.lifetime'), function() use($currency){
