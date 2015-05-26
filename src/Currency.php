@@ -9,7 +9,7 @@ class Currency{
 
         if ($currency == 'USD')
             return $value;
-        $rate  = Cache::remember('currency-usd'.'-'.$currency, 100, function() use($currency){
+        $rate  = Cache::remember('currency-usd'.'-'.$currency, config('currency.lifetime'), function() use($currency){
             return self::getCurrency('USD', $currency);
         });
         return $rate * $value;
