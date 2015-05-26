@@ -5,6 +5,8 @@ use Webcastle\Currency\Exceptions\ParseError;
 use Session;
 
 class Currency{
+	
+	private static $codes;
 
     public static function usdTo($currency, $value){
         if ($currency == 'USD')
@@ -50,4 +52,13 @@ class Currency{
         return Session::put('currency', $currency);
     }
 
+	public static function validate($currency){
+		if (static::$codes != null){
+			static::$codes = config('currency.currency_list');
+		}
+		
+		if( !isset(static::$codes[$currency]) ){
+			throw new CurrencyNotFound();
+		}
+	}
 }
