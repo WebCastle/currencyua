@@ -51,16 +51,19 @@ class Currency{
     }
 
     public static function setCurrentCurrency($currency){
-        return Session::put('currency', $currency);
+        Session::put('currency', $currency);
+        static::getCurrentCurrency();
     }
 
 	public static function validate($currency){
-		if (static::$codes != null){
+
+        if (static::$codes == null){
 			static::$codes = config('currency.currency_list');
 		}
-		
+
 		if( !isset(static::$codes[$currency]) ){
 			throw new CurrencyNotFound();
 		}
+
 	}
 }

@@ -11,8 +11,9 @@ function from_usd($value){
 
 function currency($currency = null){
 	if($currency != null ){
-		Currency::setCurrentCurrency($currency);
+        return Currency::setCurrentCurrency($currency);
 	}else{
-		Currency::getCurrentCurrency($currency);
+		return Currency::getCurrentCurrency();
 	}
-};
+}
+
