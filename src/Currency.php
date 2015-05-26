@@ -2,7 +2,7 @@
 
 class Currency{
 
-	public function print_currencies(){
+	public static function print_currency(){
 		echo 1;
 	}
 	
