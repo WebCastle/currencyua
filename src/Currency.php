@@ -1,16 +1,14 @@
 <?php namespace Webcastle\Currency;
 
 use Illuminate\Support\Facades\Cache;
+use Session;
 
 class Currency{
 
-    private $currencies;
-
-    public static function fromUsd($value){
-        echo 1;
-    }
-
     public static function usdTo($currency, $value){
+
+        if ($currency == 'USD')
+            return $value;
         $rate  = Cache::remember('currency-usd'.'-'.$currency, 100, function() use($currency){
             return self::getCurrency('USD', $currency);
         });
@@ -39,4 +37,7 @@ class Currency{
         return round($data[0], 2);
     }
 
+    public static function getCurrentCurrency(){
+        return Session::get('currency');
+    }
 }

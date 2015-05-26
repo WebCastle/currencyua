@@ -1,6 +1,7 @@
 <?php namespace Webcastle\Currency;
 
 use Illuminate\Support\ServiceProvider;
+use Session;
 
 class CurrencyServiceProvider extends ServiceProvider
 {
@@ -22,6 +23,12 @@ class CurrencyServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(
             __DIR__.'/config/currency.php', 'currency'
         );
-        
+
+
+        $defaultCurrency = Session::get('currency');
+        if ($defaultCurrency == null){
+            Session::set('currency', config("currency.default_currency"));
+        }
+
     }
 }
