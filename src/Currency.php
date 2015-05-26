@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Cache;
 use Webcastle\Currency\Exceptions\ParseError;
+use Webcastle\Currency\Exceptions\CurrencyNotFound;
 use Session;
 
 class Currency{
