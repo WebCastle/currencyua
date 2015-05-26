@@ -1,4 +1,4 @@
-<?php namespace WebCastle\Currency;
+<?php namespace Webcastle\Currency;
 
 class Currency{
 
