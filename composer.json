@@ -11,7 +11,7 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"Webcastle\\Currencyua\\": "src/"
+			"Webcastle\\Currency\\": "src/"
 		},
 		"files": [
 			"src/helpers.php"
