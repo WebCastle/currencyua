@@ -15,7 +15,7 @@ class Currency{
         return $rate * $value;
     }
 
-    public function getCurrency(){
+    public static function getCurrency(){
         return 11;
     }
 	
