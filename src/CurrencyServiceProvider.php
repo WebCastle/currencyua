@@ -7,11 +7,9 @@ class CurrencyServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-		
         $this->publishes([
             __DIR__.'/config/currency.php' => config_path('currency.php'),
         ]);
-        
     }
 
     /**
@@ -19,16 +17,13 @@ class CurrencyServiceProvider extends ServiceProvider
      */
     public function register()
     {
-		
         $this->mergeConfigFrom(
             __DIR__.'/config/currency.php', 'currency'
         );
-
 
         $defaultCurrency = Session::get('currency');
         if ($defaultCurrency == null){
             Session::set('currency', config("currency.default_currency"));
         }
-
     }
 }

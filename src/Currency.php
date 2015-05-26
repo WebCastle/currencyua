@@ -1,12 +1,12 @@
 <?php namespace Webcastle\Currency;
 
 use Illuminate\Support\Facades\Cache;
+use Webcastle\Currency\Exceptions\ParseError;
 use Session;
 
 class Currency{
 
     public static function usdTo($currency, $value){
-
         if ($currency == 'USD')
             return $value;
         $rate  = Cache::remember('currency-usd'.'-'.$currency, config('currency.lifetime'), function() use($currency){
@@ -16,6 +16,7 @@ class Currency{
     }
 
     public static function getCurrency($from_Currency, $to_Currency){
+		
         $from_Currency = urlencode($from_Currency);
         $to_Currency = urlencode($to_Currency);
 
@@ -32,6 +33,10 @@ class Currency{
         $rawdata = curl_exec($ch);
         curl_close($ch);
         $data = explode('bld>', $rawdata);
+
+        if ( !isset($data[1]) || !isset($data[0])  ){
+            throw new ParseError();
+        }
         $data = explode($to_Currency, $data[1]);
 
         return round($data[0], 2);
@@ -40,4 +45,9 @@ class Currency{
     public static function getCurrentCurrency(){
         return Session::get('currency');
     }
+
+    public static function setCurrentCurrency($currency){
+        return Session::put('currency', $currency);
+    }
+
 }
