@@ -1,0 +1,10 @@
+{
+    "name": "webcastle/currencyua",
+    "authors": [
+        {
+            "name": "Vlad Lavro",
+            "email": "vm.lavro@gmail.com"
+        }
+    ],
+    "require": {}
+}
